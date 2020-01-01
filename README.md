@@ -57,4 +57,4 @@ $ clj -A:fill-month
 
 Run it with something like this:
 
-    clj -A:fill-month >> kb/personal/journal.org
+    clj -A:fill-month >> ~/kb/personal/journal.org
