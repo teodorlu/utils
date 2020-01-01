@@ -20,6 +20,7 @@ It belongs under the global `:aliases` key.
 With the alias setup, the script can be run simply from the command line:
 
 ```
+$ # As of January 2020. January 1st is a Wednesday.
 $ clj -A:fill-month
 ** 01 Wednesday
 ** 02 Thursday
