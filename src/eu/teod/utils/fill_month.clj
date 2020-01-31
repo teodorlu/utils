@@ -100,13 +100,16 @@
   (fill-org-log-month-english (time/plus (time/local-date) (time/days 5)))
   )
 
-(defn -main []
-  (let [today (time/local-date)
-        heuristic-month-gen-date (time/plus today (time/days 5))]
-    (binding [*out* *err*]
-      (println "Today:" today)
-      (println "Filled month for date:" heuristic-month-gen-date))
-    (println (fill-org-log-month-english heuristic-month-gen-date))))
+(defn -main
+  ([] (-main "0"))
+  ([advance-days-str]
+   (let [advance-days (Long/parseLong advance-days-str)
+         today (time/local-date)
+         heuristic-month-gen-date (time/plus today (time/days advance-days))]
+     (binding [*out* *err*]
+       (println "Today:" (str today))
+       (println "Advanced" advance-days-str "days into" (str heuristic-month-gen-date)))
+     (println (fill-org-log-month-english heuristic-month-gen-date)))))
 
 (comment
   (-main)

@@ -18,6 +18,20 @@ To use, add this alias to your `~/.clojure/deps.edn`:
 
 It belongs under the global `:aliases` key.
 
+
+
+Generate for todays month:
+
+```bash
+$ clj -A:fill-month
+```
+
+Generate for the month 1 day from now:
+
+```bash
+$ clj -A:fill-month 1
+```
+
 With the alias setup, the script can be run simply from the command line:
 
 ```
