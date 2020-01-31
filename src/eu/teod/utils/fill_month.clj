@@ -91,10 +91,8 @@
   (let [starting-day (month-start-weekday date)
         month-days (month-days date)]
     (string/join "\n"
-                 (concat
-                  [(str "Month date heuristic: " "/" date "/")]
-                  (for [[nr day] (iterate-month starting-day month-days)]
-                    (format "** %02d %s" nr (english-day-name day)))))))
+                 (for [[nr day] (iterate-month starting-day month-days)]
+                   (format "** %02d %s" nr (english-day-name day))))))
 
 (comment
   (fill-org-log-month-english (time/plus (time/local-date) (time/days 5)))
