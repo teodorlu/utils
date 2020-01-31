@@ -91,16 +91,22 @@
   (let [starting-day (month-start-weekday date)
         month-days (month-days date)]
     (string/join "\n"
-                 (for [[nr day] (iterate-month starting-day month-days)]
-                   (format "** %02d %s" nr (english-day-name day))))))
+                 (concat
+                  [(str "Month date heuristic: " "/" date "/")]
+                  (for [[nr day] (iterate-month starting-day month-days)]
+                    (format "** %02d %s" nr (english-day-name day)))))))
 
 (comment
-  (fill-org-log-month-english (time/local-date))
+  (fill-org-log-month-english (time/plus (time/local-date) (time/days 5)))
   )
 
 (defn -main []
-  (let [today (time/local-date)]
-    (println (fill-org-log-month-english today))))
+  (let [today (time/local-date)
+        heuristic-month-gen-date (time/plus today (time/days 5))]
+    (binding [*out* *err*]
+      (println "Today:" today)
+      (println "Filled month for date:" heuristic-month-gen-date))
+    (println (fill-org-log-month-english heuristic-month-gen-date))))
 
 (comment
   (-main)
