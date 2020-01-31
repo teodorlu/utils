@@ -12,7 +12,7 @@ To use, add this alias to your `~/.clojure/deps.edn`:
 ```clj
             :fill-month
             {:extra-deps {eu.teod/utils {:git/url "https://github.com/teodorlu/utils.git"
-                                         :sha "0203597b4c325463aeb482e0bf1c6f333abb4e1c"}}
+                                         :sha "1617613d356930be56a883abe2cf7f196e0e8a68"}}
              :main-opts ["-m" "eu.teod.utils.fill-month"]}
 ```
 
