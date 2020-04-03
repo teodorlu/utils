@@ -122,10 +122,10 @@
   [date]
   (let [starting-day (month-start-weekday date)
         month-days (month-days date)
-        month-name (-> date time/month .getValue
-                       month-nr->month month->english-name)]
+        month-nr (-> date time/month .getValue)
+        month-name (-> month-nr month-nr->month month->english-name)]
     (str
-     "* Future: " month-name "\n"
+     (format "* Future\n%s.\n" month-name)
      (string/join "\n"
                   (for [[nr day] (iterate-month starting-day month-days)]
                     (format "** %02d %s" nr (english-day-name day)))))))
