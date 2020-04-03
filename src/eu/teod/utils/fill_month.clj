@@ -82,17 +82,54 @@
   (let [today (time/local-date)]
     (iterate-month (month-start-weekday today)
                    (month-days today)))
+
+  (let [date (time/local-date)]
+    (.getValue (time/month date)))
+  ;; => 4
   )
+
+(def month-nr->month
+  {1 :jan
+   2 :feb
+   3 :mar
+   4 :apr
+   5 :may
+   6 :jun
+   7 :jul
+   8 :aug
+   9 :sep
+   10 :oct
+   11 :nov
+   :12 :dec})
+
+(def month->english-name
+  {:jan "January"
+   :feb "February"
+   :mar "March"
+   :apr "April"
+   :may "May"
+   :jun "June"
+   :jul "July"
+   :aug "August"
+   :sep "September"
+   :oct "October"
+   :nov "November"
+   :dec "December"})
 
 
 (defn fill-org-log-month-english
   "Generate \"** 01 Thursday\n**02 Friday\n ... for a month"
   [date]
   (let [starting-day (month-start-weekday date)
-        month-days (month-days date)]
-    (string/join "\n"
-                 (for [[nr day] (iterate-month starting-day month-days)]
-                   (format "** %02d %s" nr (english-day-name day))))))
+        month-days (month-days date)
+        month-name (-> date time/month .getValue
+                       month-nr->month month->english-name)]
+    (str
+     "* Future\n"
+     month-name ".\n"
+     (string/join "\n"
+                  (for [[nr day] (iterate-month starting-day month-days)]
+                    (format "** %02d %s" nr (english-day-name day)))))))
 
 (comment
   (fill-org-log-month-english (time/plus (time/local-date) (time/days 5)))
