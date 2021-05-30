@@ -39,16 +39,17 @@
 
 (def ^:private article-page-id "1odcmTECT")
 
-(def tmp (roam-db))
+(def teod-db (roam-db))
 
 ;; can we query this thing?
 
-(d/schema tmp)
+(comment
+  (d/schema teod-db)
 
-(d/pull tmp '[*] [:block/uid article-page-id])
-{:block/children [#:db{:id 36296} #:db{:id 36317} #:db{:id 36342}],
- :block/uid "1odcmTECT",
- :node/title "teod/Descriptive truth, prescriptive truth"}
+  (d/pull teod-db '[*] [:block/uid article-page-id])
+  {:block/children [#:db{:id 36296} #:db{:id 36317} #:db{:id 36342}],
+   :block/uid "1odcmTECT",
+   :node/title "teod/Descriptive truth, prescriptive truth"})
 
 ;; give me a single entity with
 
@@ -77,14 +78,14 @@
       ['?article :block/uid article-page-id]
       ['?article :block/children '?teod-content]
       ]
-     tmp)
+     teod-db)
 
-(defn article-section [article-id section-string]
+(defn article-section [db article-id section-string]
   (d/q `[:find ?outline .
          :where
          [?article :block/uid ~article-id]
          [?article :block/children ?outline]
          [?outline :block/string ~section-string]]
-       tmp))
+       db))
 
-(article-section article-page-id "[[teod/outline]]")
+(article-section teod-db article-page-id "[[teod/outline]]")
