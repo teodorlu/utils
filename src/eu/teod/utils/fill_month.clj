@@ -1,6 +1,5 @@
 (ns eu.teod.utils.fill-month
-  (:require [clojure.spec.alpha :as s]
-            [java-time :as time]
+  (:require [java-time :as time]
             [java-time.repl]
             [clojure.string :as string]))
 
@@ -125,7 +124,7 @@
         month-nr (-> date time/month .getValue)
         month-name (-> month-nr month-nr->month month->english-name)]
     (str
-     (format "* Future\n%s.\n" month-name)
+     (format "* Future\n%02d %s.\n" month-nr month-name)
      (string/join "\n"
                   (for [[nr day] (iterate-month starting-day month-days)]
                     (format "** %02d %s" nr (english-day-name day)))))))
@@ -147,5 +146,6 @@
 
 (comment
   (-main)
+
  )
 
