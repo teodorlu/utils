@@ -124,7 +124,7 @@
         month-nr (-> date time/month .getValue)
         month-name (-> month-nr month-nr->month month->english-name)]
     (str
-     (format "* Future\n%02d %s.\n" month-nr month-name)
+     (format "* Future\n%02d %s\n" month-nr month-name)
      (string/join "\n"
                   (for [[nr day] (iterate-month starting-day month-days)]
                     (format "** %02d %s" nr (english-day-name day)))))))
